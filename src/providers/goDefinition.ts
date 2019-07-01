@@ -1,21 +1,21 @@
 'use strict';
 
 import {
-	TextDocument,
+	Files,
 	Location,
 	Position,
-	Files
+	TextDocument
 } from 'vscode-languageserver';
 import Uri from 'vscode-uri';
 
-import { NodeType } from '../types/nodes';
-import { ISymbols } from '../types/symbols';
-import { ISettings } from '../types/settings';
 import { ICache } from '../services/cache';
+import { NodeType } from '../types/nodes';
+import { ISettings } from '../types/settings';
+import { ISymbols } from '../types/symbols';
 
 import { parseDocument } from '../services/parser';
-import { getSymbolsCollection } from '../utils/symbols';
 import { getDocumentPath } from '../utils/document';
+import { getSymbolsCollection } from '../utils/symbols';
 
 interface ISymbol {
 	document: string;

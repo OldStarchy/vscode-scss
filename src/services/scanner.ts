@@ -43,7 +43,7 @@ function makeSymbolsForDocument(root: string, cache: ICache, entry: IFile, setti
  */
 function makeEntryFile(filepath: string, ctime: Date): IFile {
 	return {
-		filepath: filepath,
+		filepath,
 		dir: path.dirname(filepath),
 		ctime
 	};

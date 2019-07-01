@@ -63,7 +63,7 @@ export function parseDocument(root: string, document: TextDocument, offset: numb
 			symbols.imports.push({
 				css: filepath.substr(-4) === '.css',
 				dynamic: reDynamicPath.test(filepath),
-				filepath: filepath,
+				filepath,
 				reference: true
 			});
 		});
