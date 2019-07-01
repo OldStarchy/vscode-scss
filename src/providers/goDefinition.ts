@@ -59,13 +59,13 @@ function getSymbols(symbolList: ISymbols[], identifier: IIdentifier, currentPath
 /**
  * Do Go Definition :)
  */
-export function goDefinition(document: TextDocument, offset: number, cache: ICache, settings: ISettings): Promise<Location> {
+export function goDefinition(root: string, document: TextDocument, offset: number, cache: ICache, settings: ISettings): Promise<Location> {
 	const documentPath = Files.uriToFilePath(document.uri) || document.uri;
 	if (!documentPath) {
 		return Promise.resolve(null);
 	}
 
-	const resource = parseDocument(document, offset, settings);
+	const resource = parseDocument(root, document, offset, settings);
 	const hoverNode = resource.node;
 	if (!hoverNode || !hoverNode.type) {
 		return Promise.resolve(null);
