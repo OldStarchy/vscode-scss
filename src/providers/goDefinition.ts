@@ -1,21 +1,21 @@
 'use strict';
 
 import {
-	TextDocument,
+	Files,
 	Location,
 	Position,
-	Files
+	TextDocument
 } from 'vscode-languageserver';
 import Uri from 'vscode-uri';
 
-import { NodeType } from '../types/nodes';
-import { ISymbols } from '../types/symbols';
-import { ISettings } from '../types/settings';
 import { ICache } from '../services/cache';
+import { NodeType } from '../types/nodes';
+import { ISettings } from '../types/settings';
+import { ISymbols } from '../types/symbols';
 
 import { parseDocument } from '../services/parser';
-import { getSymbolsCollection } from '../utils/symbols';
 import { getDocumentPath } from '../utils/document';
+import { getSymbolsCollection } from '../utils/symbols';
 
 interface ISymbol {
 	document: string;
@@ -59,13 +59,13 @@ function getSymbols(symbolList: ISymbols[], identifier: IIdentifier, currentPath
 /**
  * Do Go Definition :)
  */
-export function goDefinition(document: TextDocument, offset: number, cache: ICache, settings: ISettings): Promise<Location> {
+export function goDefinition(root: string, document: TextDocument, offset: number, cache: ICache, settings: ISettings): Promise<Location> {
 	const documentPath = Files.uriToFilePath(document.uri) || document.uri;
 	if (!documentPath) {
 		return Promise.resolve(null);
 	}
 
-	const resource = parseDocument(document, offset, settings);
+	const resource = parseDocument(root, document, offset, settings);
 	const hoverNode = resource.node;
 	if (!hoverNode || !hoverNode.type) {
 		return Promise.resolve(null);
